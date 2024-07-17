@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>템플릿 ejs</title>
+</head>
+<body>
+    <h2>데이터 전송 결과</h2>
+    <h5>비밀번호: <%= memberInfo.pw %></h5>
+    <h5>이메일: <%= memberInfo.email %></h5>
+    <h5>성별: <%= memberInfo.gender %></h5>
+    <h5>취미: <%= memberInfo.hobby %></h5>
+    <h5>태어난연도: <%= memberInfo.year %></h5>
+
+    <a href="/signupForm">회원가입 폼으로 이동</a>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비동기 통신</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <main>
+        <form name="register-form">
+            <label for="username">이름</label>
+            <input type="text" id="username" required /><br />
+            <label for="email">이메일</label>
+            <input type="email" id="email" required /><br /><br />
+            <button type="button" onclick="ajaxGet()">ajax get 제출</button><br />
+            <button type="button" onclick="ajaxPost()">ajax post 제출</button><br />
+            <button type="button" onclick="axiosGet()">axios get 제출</button><br />
+            <button type="button" onclick="axiosPost()">axios post 제출</button><br />
+            <button type="button" onclick="fetchGet()">fetch get 제출</button><br />
+            <button type="button" onclick="fetchPost()">fetch post 제출</button><br />
+        </form>
+        
+        <div class="result"></div>
+    </main>
+
+    <script>
+        const result = document.querySelector(".result");
+        // ajaxGet()
+        function ajaxGet(){
+            const form = document.forms['register-form'];
+            //서버로 보내는 데이터(객체)
+            const data = {
+                username: form.username.value,
+                email: form.email.value
+            }
+            console.log(data);
+
+            $.ajax({
+                type: 'GET',
+                url: '/ajax',
+                data: data,
+                success: (res) => {
+                    console.log('res', res);
+                    result.textContent = `${res.username} ${res.email}`;
+                }
+            })
+        }
+
+        //ajaxPost()
+        function ajaxPost(){
+            const form = document.forms['register-form'];
+            if(form.username.value == ""){
+                alert("이름을 입력하세요");
+                return;
+            }
+            //서버로 보내는 데이터(객체)
+            const data = {
+                username: form.username.value,
+                email: form.email.value
+            }
+            console.log(data);
+
+            $.ajax({
+                type: 'POST',
+                url: '/ajax',
+                data: data,
+                success: (res) => {
+                    console.log('res', res);
+                    result.textContent = `${res.username} ${res.email}`;
+                }
+            })
+        }
+
+        //axiosGet()
+        function axiosGet(){
+            const result2 = document.querySelector(".result");
+            const form = document.forms['register-form'];
+            const data = {
+                username: form.username.value,
+                email: form.email.value,
+            };
+
+            axios({
+                method: 'GET',
+                url: `/axios?username=${form.username.value}&${form.email.value}`
+            }).then((res) => {
+                console.log('res', res);
+                const { result, username, email } = res.data;
+                if(result){
+                    result2.textContent = `${username}님 이메일 주소는 ${email}`;
+                }else{
+                    result2.textContent = "오류가 발생했습니다.";
+                }
+            })
+        }
+
+        //axiosPost()
+        async function axiosPost(){
+            const form = document.forms['register-form'];
+            const data = {
+                username: form.username.value,
+                email: form.email.value,
+            };
+
+           let res = await axios({
+                method: 'POST',
+                url: `/axios`,
+                data
+            }).then((res) => {
+                console.log('res', res);
+                result.textContent = `${res.data.username}님 이메일 주소는 ${res.data.email}`;
+            })
+        }
+
+        //fetchGet()
+        function fetchGet(){
+            const result3 = document.querySelector(".result");
+            const username = document.querySelector('#username').value;
+            const email = document.querySelector('#email').value;
+            const url = `?username=${username}&email=${email}`;
+            fetch(`/fetch${url}`, {
+                method: 'GET'
+            }).then((res) => {
+                console.log('res', res);
+                //json 응답을 javascript 객체로 파싱함
+                return res.json();
+            }).then((data) => {
+                console.log('data', data);
+                const { result, username, email } = data;
+                if(result){
+                    result3.textContent = `${username}님 이메일 주소는 ${email}`;
+                }else{
+                    result3.textContent = "오류가 발생했습니다.";
+                }
+            })
+        }
+
+        async function fetchPost(){
+            const resultBox = document.querySelector(".result");
+
+            const data = {
+                username : document.querySelector('#username').value,
+                email : document.querySelector('#email').value
+            }
+            
+            const res = await fetch('/fetch', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log('res', res);
+            const result = await res.json();
+            console.log('result', result);
+            resultBox.textContent = `${result.username}님 이메일 주소는 ${result.email}`;
+        }
+    </script>
+</body>
+</html>

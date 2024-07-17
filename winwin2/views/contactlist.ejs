@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윈윈 쇼핑몰입니다.</title>
+    <script src="https://kit.fontawesome.com/187dabceeb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <%- include('header.ejs') %>
+    <!-- 문의 게시판 -->
+    <section id="contactlist">
+      <div class="container">
+        <div class="title">
+            <h4>문의 게시판</h4>
+            <h2>Contact List</h2>
+        </div>
+        <!-- 검색 -->
+        <form action="/contactlist" method="get">
+            <div class="form-group">
+                <input type="text" name="keyword" value="<%=kw %>" placeholder="검색어 입력">
+                <button type="submit">검색</button>
+            </div>
+        </form>
+
+        <!-- 게시판 -->
+        <div class="contact-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>이름</th>
+                        <th>이메일</th>
+                        <th>작성일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <% for(let i=0; i<lists.length; i++){ %> 
+                    <tr>
+                        <td><%= lists[i].id %></td>
+                        <td><a href="/detail/<%= lists[i].id %>"> <%= lists[i].title %></a></td>
+                        <td><%= lists[i].username %></td>
+                        <td><%= lists[i].email %></td>
+                        <td><%= lists[i].regdate %></td>
+                    </tr>
+                   <% } %>
+                </tbody>
+            </table>
+        </div>
+      </div>  
+    </section> 
+</body>
+</html>

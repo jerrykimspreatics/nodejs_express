@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>템플릿 ejs</title>
+</head>
+<body>
+    <h2>폼 전송</h2>
+    <h4>GET 요청</h4>
+    <form action="/getForm" method="GET">
+        <input type="text" name="id" placeholder="id" required>
+        <input type="password" name="pw" placeholder="password" required>
+        <button>제출</button>
+    </form>
+
+    <h4>POST 요청</h4>
+    <form action="/postForm" method="POST">
+        <input type="text" name="id" placeholder="id" required>
+        <input type="password" name="pw" placeholder="password" required>
+        <button>제출</button>
+    </form>
+</body>
+</html>

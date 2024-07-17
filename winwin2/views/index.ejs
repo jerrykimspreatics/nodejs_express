@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윈윈 쇼핑몰입니다.</title>
+    <script src="https://kit.fontawesome.com/187dabceeb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- <header></header> -->
+    <%- include('header.ejs') %>
+    <main>
+        <div class="container">
+          <h4>Welcome</h4>
+          <h2>WinWin 몰입니다.</h2>
+          <p>합리적인 가격에 좋은 상품을 구입할 수 있어요</p>
+          <button class="cart"><i class="fa-solid fa-cart-shopping"></i></button>
+        </div>
+    </main>
+
+    <!-- 회사 소개 -->
+    <section id="about">
+        <div class="container">
+          <div class="title">
+            <h4>나는?</h4>
+            <h2>About Me</h2>
+          </div>
+          <div class="about-self">
+            <div class="left">
+              <img src="./images/muwui.jpg" alt="내 사진">
+            </div>
+            <div class="right">
+              <h3>안녕하세요, <strong>김기용입니다.</strong></h3>
+              <p>사는곳: 서울특별시 은평구</p>
+              <p>하는일: 웹 풀스택 개발자 과정 강의</p> 
+              <p>경력: <br>
+                 &nbsp; - (현)코딩온 : 웹 개발자 부트캠프<br>
+                 &nbsp; - (전)그린, 하이미디어 컴퓨터, 에듀윌: 웹 개발자 강의<br>
+                 &nbsp; - (전)방과후 특기 적성 강사(아두이노, 교육용 로봇)</p>
+              <p>동호회: <br>
+                 &nbsp; - 기천협회 : 전통 무예 기천문(氣天門) 수련</p>
+              <div class="social">
+                <a href="#"><i class="fa-brands fa-square-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-square-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-square-twitter"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+</body>
+</html>

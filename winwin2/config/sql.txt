@@ -1,0 +1,26 @@
+-- myuser 계정 생성 
+create user 'myuser'@'%' identified by 'pw12345';
+
+-- myuser 계정에 DB 권한 부여(모든 DB에 접근 가능하도록)
+grant all privileges on *.* to 'myuser'@'%' with grant option;
+
+flush privileges;
+
+-- mysql 비밀번호 변경할 경우(변경후 캐시 지우기 필요함) 
+alter user 'myuser'@'%' identified by 'pw54321';
+
+-- user connection ui 만들고 db 생성
+create database kdt;
+
+drop table if exists contact;
+create table contact(
+	id int primary key auto_increment,
+    username varchar(20) not null,
+    email varchar(50) not null unique,
+    title varchar(100) not null,
+    content text not null,
+    filename varchar(100),
+    regdate varchar(30) not null
+);
+
+select * from contact order by id desc;
